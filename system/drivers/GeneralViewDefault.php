@@ -58,7 +58,7 @@ class GeneralViewDefault extends Controller implements InterfaceGeneralView
 
 	/**
 	 * The current working model
-	 * @var InterfaceGeneralModel
+	 * @var GeneralRecord
 	 */
 	protected $objCurrentModel = null;
 
@@ -130,7 +130,7 @@ class GeneralViewDefault extends Controller implements InterfaceGeneralView
 		$objDataProvider = $this->getDC()->getDataProvider();
 
 		// Check if DP is multilanguage
-		if ($this->getDC()->getDataProvider() instanceof InterfaceGeneralDataMultiLanguage)
+		if ($this->getDC()->getDataProvider() instanceof GeneralStorageMultiLanguage)
 		{
 			$this->blnMLSupport = true;
 			$this->objLanguagesSupported = $objDataProvider->getLanguages($this->getDC()->getId());
@@ -703,7 +703,7 @@ class GeneralViewDefault extends Controller implements InterfaceGeneralView
 
 	/**
 	 * @todo Update for clipboard
-	 * @param InterfaceGeneralModel $objModel
+	 * @param GeneralRecord $objModel
 	 * @return string
 	 */
 	protected function renderViewParentButtons($objModel)
@@ -1393,7 +1393,7 @@ class GeneralViewDefault extends Controller implements InterfaceGeneralView
 	/**
 	 * Get arguments for label
 	 *
-	 * @param InterfaceGeneralModel $objModelRow
+	 * @param GeneralRecord $objModelRow
 	 * @return array
 	 */
 	protected function getListViewLabelArguments($objModelRow)
@@ -1707,7 +1707,7 @@ class GeneralViewDefault extends Controller implements InterfaceGeneralView
 	/**
 	 * Compile buttons from the table configuration array and return them as HTML
 	 *
-	 * @param InterfaceGeneralModel $objModelRow
+	 * @param GeneralRecord $objModelRow
 	 * @param string $strTable
 	 * @param array $arrRootIds
 	 * @param boolean $blnCircularReference
@@ -1716,7 +1716,7 @@ class GeneralViewDefault extends Controller implements InterfaceGeneralView
 	 * @param int $strNext
 	 * @return string
 	 */
-	protected function generateButtons(InterfaceGeneralModel $objModelRow, $strTable, $arrRootIds = array(), $blnCircularReference = false, $arrChildRecordIds = null, $strPrevious = null, $strNext = null)
+	protected function generateButtons(GeneralRecord $objModelRow, $strTable, $arrRootIds = array(), $blnCircularReference = false, $arrChildRecordIds = null, $strPrevious = null, $strNext = null)
 	{
 		if (!count($GLOBALS['TL_DCA'][$strTable]['list']['operations']))
 		{

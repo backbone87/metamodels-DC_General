@@ -37,7 +37,7 @@ if (!defined('TL_ROOT'))
  * @package	   generalDriver
  * @author     Christian Schiffler <c.schiffler@cyberspectrum.de>
  */
-class GeneralDataTableRowsAsRecords extends GeneralDataDefault
+class GeneralStorageTableRowsAsRecords extends GeneralStorageDefault
 {
 	/* /////////////////////////////////////////////////////////////////////////
 	 * -------------------------------------------------------------------------
@@ -67,7 +67,7 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 
 		if (!$arrConfig['group_column'])
 		{
-			throw new Exception('GeneralDataTableRowsAsRecords needs a grouping column.', 1);
+			throw new Exception('GeneralStorageTableRowsAsRecords needs a grouping column.', 1);
 
 		}
 		$this->strGroupCol = $arrConfig['group_column'];
@@ -93,7 +93,7 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	/**
 	 * Delete an item.
 	 *
-	 * @param int|string|InterfaceGeneralModel Id or the object itself, to delete
+	 * @param int|string|GeneralRecord Id or the object itself, to delete
 	 */
 	public function delete($item)
 	{
@@ -103,15 +103,15 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	/**
 	 * Fetch a single/first record by id/filter.
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
-	 * @return InterfaceGeneralModel
+	 * @return GeneralRecord
 	 */
-	public function fetch(GeneralDataConfigDefault $objConfig)
+	public function fetch(GeneralStorageConfigDefault $objConfig)
 	{
 		if (!$objConfig->getId())
 		{
-			throw new Exception("Error, no id passed, GeneralDataTableRowsAsRecords is only intended for edit mode.", 1);
+			throw new Exception("Error, no id passed, GeneralStorageTableRowsAsRecords is only intended for edit mode.", 1);
 		}
 
 		$strQuery = sprintf('SELECT %s FROM %s WHERE %s=?', $this->buildFieldQuery($objConfig), $this->strSource, $this->strGroupCol);
@@ -139,11 +139,11 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	/**
 	 * Fetch all records (optional limited).
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return InterfaceGeneralCollection
 	 */
-	public function fetchAll(GeneralDataConfigDefault $objConfig)
+	public function fetchAll(GeneralStorageConfigDefault $objConfig)
 	{
 		$this->youShouldNotCallMe(__METHOD__);
 	}
@@ -151,11 +151,11 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	/**
 	 * Fetch multiple records by ids.
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return InterfaceGeneralCollection
 	 */
-	public function fetchEach(GeneralDataConfigDefault $objConfig)
+	public function fetchEach(GeneralStorageConfigDefault $objConfig)
 	{
 		$this->youShouldNotCallMe(__METHOD__);
 	}
@@ -163,11 +163,11 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	/**
 	 * Return the amount of total items.
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return int
 	 */
-	public function getCount(GeneralDataConfigDefault $objConfig)
+	public function getCount(GeneralStorageConfigDefault $objConfig)
 	{
 		$this->youShouldNotCallMe(__METHOD__);
 	}
@@ -189,11 +189,11 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	 * The parent id (id of the model) will get checked and reflected also for new items.
 	 * When rows with duplicate ids are encountered (like from MCW for example), the dupes are inserted as new rows.
 	 *
-	 * @param InterfaceGeneralModel $objItem   the model to save.
+	 * @param GeneralRecord $objItem   the model to save.
 	 *
 	 * @param bool                  $recursive ignored as not relevant.
 	 */
-	public function save(InterfaceGeneralModel $objItem, $recursive = false)
+	public function save(GeneralRecord $objItem, $recursive = false)
 	{
 		$arrData = $objItem->getProperty('rows');
 		if (!($objItem->getID() && $arrData))
@@ -278,7 +278,7 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 		return null;
 	}
 
-	public function saveVersion(InterfaceGeneralModel $objModel, $strUsername)
+	public function saveVersion(GeneralRecord $objModel, $strUsername)
 	{
 		$this->youShouldNotCallMe(__METHOD__);
 	}
@@ -309,8 +309,8 @@ class GeneralDataTableRowsAsRecords extends GeneralDataDefault
 	/**
 	 * Check if two models have the same properties
 	 *
-	 * @param InterfaceGeneralModel $objModel1
-	 * @param InterfaceGeneralModel $objModel2
+	 * @param GeneralRecord $objModel1
+	 * @param GeneralRecord $objModel2
 	 *
 	 * return boolean True - If both models are same, false if not
 	 */

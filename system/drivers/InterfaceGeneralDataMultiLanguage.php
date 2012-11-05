@@ -26,7 +26,7 @@
  * @license    GNU/LGPL
  * @filesource
  */
-interface InterfaceGeneralDataMultiLanguage extends InterfaceGeneralData
+interface GeneralStorageMultiLanguage extends GeneralStorage
 {
 
     /**
@@ -41,7 +41,7 @@ interface InterfaceGeneralDataMultiLanguage extends InterfaceGeneralData
      * Get the fallback language
      * 
      * @param mixed $mixID The ID of record
-     * @return InterfaceGeneralModel
+     * @return GeneralRecord
      */
     public function getFallbackLanguage($mixID);
 

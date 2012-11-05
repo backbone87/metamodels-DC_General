@@ -24,7 +24,7 @@ if (!defined('TL_ROOT'))
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @see InterfaceGeneralData
+ * @see GeneralStorage
  * @copyright  MEN AT WORK 2012
  * @package    generalDriver
  * @license    GNU/LGPL

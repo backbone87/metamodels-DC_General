@@ -24,13 +24,13 @@ if (!defined('TL_ROOT'))
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @see InterfaceGeneralData
+ * @see GeneralStorage
  * @copyright  MEN AT WORK 2012
  * @package    generalDriver
  * @license    GNU/LGPL
  * @filesource
  */
-class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
+class GeneralStorageConfigDefault implements GeneralStorageConfig
 {
 
 	protected $intId = null;
@@ -47,7 +47,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	/**
 	 * Create object
 	 * 
-	 * @return GeneralDataConfigDefault 
+	 * @return GeneralStorageConfigDefault 
 	 */
 	private function __construct()
 	{
@@ -56,7 +56,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 
 	public static function init()
 	{
-		return new GeneralDataConfigDefault();
+		return new GeneralStorageConfigDefault();
 	}
 
 	/**
@@ -73,7 +73,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * Set specific id
 	 * 
 	 * @param integer $intId
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setId($intId)
 	{
@@ -118,7 +118,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * Set flag for return id only
 	 * 
 	 * @return boolean
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setIdOnly($blnIdOnly)
 	{
@@ -141,7 +141,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * Set the offset to start with
 	 * 
 	 * @param integer $intStart
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setStart($intStart)
 	{
@@ -164,7 +164,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * Set the limit for results
 	 * 
 	 * @param integer $intAmount
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setAmount($intAmount)
 	{
@@ -187,7 +187,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * Set the list with filter options
 	 * 
 	 * @return array
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setFilter($arrFilter)
 	{
@@ -209,7 +209,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	/**
 	 * Set the list with all sortings
 	 * 
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setSorting($arrSorting)
 	{
@@ -232,7 +232,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * Set the nessessary fields
 	 *  
 	 * @param array $arrFields
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function setFields($arrFields)
 	{
@@ -264,7 +264,7 @@ class GeneralDataConfigDefault implements InterfaceGeneralDataConfig
 	 * 
 	 * @param string $strKey
 	 * @param mixed $varValue
-	 * @return GeneralDataConfigDefault
+	 * @return GeneralStorageConfigDefault
 	 */
 	public function set($strKey, $varValue)
 	{

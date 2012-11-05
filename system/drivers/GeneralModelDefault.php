@@ -21,13 +21,13 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @see InterfaceGeneralModel
+ * @see GeneralRecord
  * @copyright  MEN AT WORK 2012
  * @package    generalDriver
  * @license    GNU/LGPL
  * @filesource
  */
-class GeneralModelDefault implements InterfaceGeneralModel
+class GeneralRecordDefault implements GeneralRecord
 {
 
     /**
@@ -54,7 +54,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     /**
      * Copy this model, without the id.
      *
-     * @return InterfaceGeneralModel
+     * @return GeneralRecord
      */
     public function __clone()
     {
@@ -72,7 +72,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::getProperty()
+     * @see GeneralRecord::getProperty()
      *
      * @param String $strPropertyName
      * @return null
@@ -95,7 +95,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::getPropertiesAsArray()
+     * @see GeneralRecord::getPropertiesAsArray()
      */
     public function getPropertiesAsArray()
     {
@@ -106,7 +106,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::getMeta()
+     * @see GeneralRecord::getMeta()
 	 *
 	 * @param string $strMetaName the meta information to retrieve.
 	 *
@@ -139,7 +139,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::setProperty()
+     * @see GeneralRecord::setProperty()
      *
      * @param String $strPropertyName
      * @param mixed $varValue
@@ -150,7 +150,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::setPropertiesAsArray()
+     * @see GeneralRecord::setPropertiesAsArray()
      */
     public function setPropertiesAsArray($arrProperties)
     {
@@ -166,7 +166,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::setMeta()
+     * @see GeneralRecord::setMeta()
 	 *
 	 * @param string $strMetaName the meta information name.
 	 *
@@ -180,7 +180,7 @@ class GeneralModelDefault implements InterfaceGeneralModel
     }
 
     /**
-     * @see InterfaceGeneralModel::hasProperties()
+     * @see GeneralRecord::hasProperties()
      *
      * @return boolean
      */

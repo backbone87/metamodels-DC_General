@@ -42,7 +42,7 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
      *
      * @see push
      */
-    public function add(InterfaceGeneralModel $objModel)
+    public function add(GeneralRecord $objModel)
     {
         $this->push($objModel);
     }
@@ -52,7 +52,7 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
      *
      * @param int $intIndex
      *
-     * @return InterfaceGeneralModel
+     * @return GeneralRecord
      */
     public function get($intIndex)
     {
@@ -73,11 +73,11 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
      * (do not fill with empty records!).
      *
      * @param int $intIndex
-     * @param InterfaceGeneralModel $objModel
+     * @param GeneralRecord $objModel
      *
      * @return void
      */
-    public function insert($intIndex, InterfaceGeneralModel $objModel)
+    public function insert($intIndex, GeneralRecord $objModel)
     {
         if ($objModel->hasProperties())
         {
@@ -124,7 +124,7 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
     /**
      * Remove a record from the end of this collection and return it.
      *
-     * @return InterfaceGeneralModel|null
+     * @return GeneralRecord|null
      */
     public function pop()
     {
@@ -142,11 +142,11 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
      * Add a record to the end of this collection.
      * (do not fill with empty records!)
      *
-     * @param InterfaceGeneralModel $objModel
+     * @param GeneralRecord $objModel
      *
      * @return void
      */
-    public function push(InterfaceGeneralModel $objModel)
+    public function push(GeneralRecord $objModel)
     {
 		if (!$objModel)
 		{
@@ -172,7 +172,7 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
     /**
      * Remove a record from the beginning of this collection and return it.
      *
-     * @return InterfaceGeneralModel|null
+     * @return GeneralRecord|null
      */
     public function shift()
     {
@@ -204,11 +204,11 @@ class GeneralCollectionDefault implements InterfaceGeneralCollection
      * Add a record at the beginning of this collection.
      * (do not fill with empty records!)
      *
-     * @param InterfaceGeneralModel $objModel
+     * @param GeneralRecord $objModel
      *
      * @return void
      */
-    public function unshift(InterfaceGeneralModel $objModel)
+    public function unshift(GeneralRecord $objModel)
     {
         if ($objModel->hasProperties())
         {

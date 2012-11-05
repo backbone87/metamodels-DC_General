@@ -24,13 +24,13 @@ if (!defined('TL_ROOT'))
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @see InterfaceGeneralData
+ * @see GeneralStorage
  * @copyright  MEN AT WORK 2012
  * @package    generalDriver
  * @license    GNU/LGPL
  * @filesource
  */
-class GeneralDataDefault implements InterfaceGeneralData
+class GeneralStorageDefault implements GeneralStorage
 {
 	/* /////////////////////////////////////////////////////////////////////
 	 * ---------------------------------------------------------------------
@@ -90,21 +90,21 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Return empty config object
 	 *
-	 * @return InterfaceGeneralDataConfig
+	 * @return GeneralStorageConfig
 	 */
 	public function getEmptyConfig()
 	{
-		return GeneralDataConfigDefault::init();
+		return GeneralStorageConfigDefault::init();
 	}
 
 	/**
 	 * Fetch an empty single record (new item).
 	 *
-	 * @return InterfaceGeneralModel
+	 * @return GeneralRecord
 	 */
 	public function getEmptyModel()
 	{
-		$objModel = new GeneralModelDefault();
+		$objModel = new GeneralRecordDefault();
 		$objModel->setProviderName($this->strSource);
 		return $objModel;
 	}
@@ -112,7 +112,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Fetch an empty single collection (new item).
 	 *
-	 * @return InterfaceGeneralModel
+	 * @return GeneralRecord
 	 */
 	public function getEmptyCollection()
 	{
@@ -128,7 +128,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Build the field list
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return string
 	 */
@@ -228,7 +228,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Build the Where
 	 * 
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 * @param array $arrParams
 	 */
 	protected function buildWhereQuery($objConfig, array &$arrParams = null)
@@ -247,7 +247,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Build the Where
 	 *
-	 * @param GeneralDataConfigDefault $objConfig,
+	 * @param GeneralStorageConfigDefault $objConfig,
 	 *
 	 * @return string
 	 */
@@ -269,7 +269,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Build the order by
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return string
 	 */
@@ -320,7 +320,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Delete an item.
 	 *
-	 * @param int|string|InterfaceGeneralModel Id or the object itself, to delete
+	 * @param int|string|GeneralRecord Id or the object itself, to delete
 	 */
 	public function delete($item)
 	{
@@ -333,7 +333,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 					->prepare("DELETE FROM $this->strSource WHERE id=?")
 					->execute($item);
 		}
-		else if (is_object($item) && $item instanceof InterfaceGeneralModel)
+		else if (is_object($item) && $item instanceof GeneralRecord)
 		{
 			if (strlen($item->getID()) != 0)
 			{
@@ -347,18 +347,18 @@ class GeneralDataDefault implements InterfaceGeneralData
 		}
 		else
 		{
-			throw new Exception("ID missing or given object not from type 'InterfaceGeneralModel'.");
+			throw new Exception("ID missing or given object not from type 'GeneralRecord'.");
 		}
 	}
 
 	/**
 	 * Fetch a single/first record by id/filter.
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
-	 * @return InterfaceGeneralModel
+	 * @return GeneralRecord
 	 */
-	public function fetch(GeneralDataConfigDefault $objConfig)
+	public function fetch(GeneralStorageConfigDefault $objConfig)
 	{
 		if ($objConfig->getId() != null)
 		{
@@ -407,11 +407,11 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Fetch all records (optional limited).
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return InterfaceGeneralCollection
 	 */
-	public function fetchAll(GeneralDataConfigDefault $objConfig)
+	public function fetchAll(GeneralStorageConfigDefault $objConfig)
 	{
 		// Build SQL
 		$query = "SELECT " . $this->buildFieldQuery($objConfig) . " FROM " . $this->strSource;
@@ -471,11 +471,11 @@ class GeneralDataDefault implements InterfaceGeneralData
 	 * 
 	 * @deprecated since version now
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return InterfaceGeneralCollection
 	 */
-	public function fetchEach(GeneralDataConfigDefault $objConfig)
+	public function fetchEach(GeneralStorageConfigDefault $objConfig)
 	{
 		return $this->fetchAll($objConfig);
 	}
@@ -483,11 +483,11 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Return the amount of total items.
 	 *
-	 * @param GeneralDataConfigDefault $objConfig
+	 * @param GeneralStorageConfigDefault $objConfig
 	 *
 	 * @return int
 	 */
-	public function getCount(GeneralDataConfigDefault $objConfig)
+	public function getCount(GeneralStorageConfigDefault $objConfig)
 	{
 		$query = "SELECT COUNT(*) AS count FROM " . $this->strSource;
 		$query .= $this->buildWhereQuery($objConfig, $arrParams);
@@ -523,7 +523,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 		$this->objDatabase->query('UPDATE ' . $this->strSource . ' SET ' . $strField . ' = \'\'');
 	}
 
-	public function save(InterfaceGeneralModel $objItem, $recursive = false)
+	public function save(GeneralRecord $objItem, $recursive = false)
 	{
 		$arrSet = array();
 
@@ -677,7 +677,7 @@ class GeneralDataDefault implements InterfaceGeneralData
 		return $objCollection;
 	}
 
-	public function saveVersion(InterfaceGeneralModel $objModel, $strUsername)
+	public function saveVersion(GeneralRecord $objModel, $strUsername)
 	{
 		$objCount = $this->objDatabase
 				->prepare("SELECT count(*) as mycount FROM tl_version WHERE pid=? AND fromTable = ?")
@@ -745,8 +745,8 @@ class GeneralDataDefault implements InterfaceGeneralData
 	/**
 	 * Check if two models have the same properties
 	 *
-	 * @param InterfaceGeneralModel $objModel1
-	 * @param InterfaceGeneralModel $objModel2
+	 * @param GeneralRecord $objModel1
+	 * @param GeneralRecord $objModel2
 	 *
 	 * return boolean True - If both models are same, false if not
 	 */

@@ -100,12 +100,12 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	/**
 	 * Call the customer label callback
 	 *
-	 * @param InterfaceGeneralModel $objModelRow
+	 * @param GeneralRecord $objModelRow
 	 * @param string $mixedLabel
 	 * @param array $args
 	 * @return string
 	 */
-	public function labelCallback(InterfaceGeneralModel $objModelRow, $mixedLabel, $args)
+	public function labelCallback(GeneralRecord $objModelRow, $mixedLabel, $args)
 	{
 		// Load DCA
 		$arrDCA = $this->objDC->getDCA();
@@ -135,7 +135,7 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	/**
 	 * Call the button callback for the regular operations
 	 *
-	 * @param InterfaceGeneralModel $objModelRow
+	 * @param GeneralRecord $objModelRow
 	 * @param array $arrDCA
 	 * @param string $strLabel
 	 * @param string $strTitle
@@ -222,10 +222,10 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	/**
 	 * Call the child record callback
 	 *
-	 * @param InterfaceGeneralModel $objModel
+	 * @param GeneralRecord $objModel
 	 * @return string|null
 	 */
-	public function childRecordCallback(InterfaceGeneralModel $objModel)
+	public function childRecordCallback(GeneralRecord $objModel)
 	{
 		// Load DCA
 		$arrDCA = $this->objDC->getDCA();
@@ -359,7 +359,7 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	 * @param type $group
 	 * @param type $mode
 	 * @param type $field
-	 * @param InterfaceGeneralModel $objModelRow
+	 * @param GeneralRecord $objModelRow
 	 * @return type
 	 */
 	public function groupCallback($group, $mode, $field, $objModelRow)
@@ -475,7 +475,7 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	/**
 	 * Call the onsave_callback
 	 *
-	 * @param InterfaceGeneralModel $objModel The model that has been updated.
+	 * @param GeneralRecord $objModel The model that has been updated.
 	 *
 	 * @return void
 	 */
@@ -531,7 +531,7 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	 * it merely just tells "we have loaded a model (from memory or database) and updated it's properties with
 	 * those from the POST data".
 	 *
-	 * @param InterfaceGeneralModel $objModel The model that has been updated.
+	 * @param GeneralRecord $objModel The model that has been updated.
 	 *
 	 * @return void
 	 */
@@ -557,7 +557,7 @@ class GeneralCallbackDefault extends System implements InterfaceGeneralCallback
 	 * it merely just tells "we have loaded a model (from memory or database) and updated it's properties with
 	 * those from the POST data".
 	 *
-	 * @param InterfaceGeneralModel $objModel The model that has been updated.
+	 * @param GeneralRecord $objModel The model that has been updated.
 	 *
 	 * @return void
 	 */

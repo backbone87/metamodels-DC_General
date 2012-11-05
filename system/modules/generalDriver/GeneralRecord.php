@@ -26,13 +26,13 @@
  * @license    GNU/LGPL
  * @filesource
  */
-interface InterfaceGeneralModel extends IteratorAggregate
+interface GeneralRecord extends IteratorAggregate
 {
 
     /**
      * Copy this model, without the id.
      *
-     * @return InterfaceGeneralModel
+     * @return GeneralRecord
      */
     public function __clone();
 

@@ -54,17 +54,17 @@ interface InterfaceGeneralCallback
     /**
      * Call the customer label callback
      *
-     * @param InterfaceGeneralModel $objModelRow
+     * @param GeneralRecord $objModelRow
      * @param string $mixedLabel
      * @param array $args
      * @return string
      */
-    public function labelCallback(InterfaceGeneralModel $objModelRow, $mixedLabel, $args);
+    public function labelCallback(GeneralRecord $objModelRow, $mixedLabel, $args);
 
     /**
      * Call the button callback for the regular operations
      *
-     * @param InterfaceGeneralModel $objModelRow
+     * @param GeneralRecord $objModelRow
      * @param string $strLabel
      * @param string $strTitle
      * @param array $arrAttributes
@@ -103,10 +103,10 @@ interface InterfaceGeneralCallback
     /**
      * Call the child record callback
      *
-     * @param InterfaceGeneralModel $objModel
+     * @param GeneralRecord $objModel
      * @return string|null
      */
-    public function childRecordCallback(InterfaceGeneralModel $objModel);
+    public function childRecordCallback(GeneralRecord $objModel);
 
     /**
      * Call the options callback for given the fields
@@ -148,7 +148,7 @@ interface InterfaceGeneralCallback
      * @param type $group
      * @param type $mode
      * @param type $field
-     * @param InterfaceGeneralModel $objModelRow
+     * @param GeneralRecord $objModelRow
      *
      * @return type
      */

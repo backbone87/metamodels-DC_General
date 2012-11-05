@@ -24,13 +24,13 @@ if (!defined('TL_ROOT'))
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @see InterfaceGeneralData
+ * @see GeneralStorage
  * @copyright  MEN AT WORK 2012
  * @package    generalDriver
  * @license    GNU/LGPL
  * @filesource
  */
-class GeneralDataMultiLanguageDefault extends GeneralDataDefault implements InterfaceGeneralDataMultiLanguage
+class GeneralStorageMultiLanguageDefault extends GeneralStorageDefault implements GeneralStorageMultiLanguage
 {
 
 	protected $strCurrentLanguage;
@@ -84,22 +84,22 @@ class GeneralDataMultiLanguageDefault extends GeneralDataDefault implements Inte
 		$this->strCurrentLanguage = $strLanguage;
 	}
 
-	public function fetch(GeneralDataConfigDefault $objConfig)
+	public function fetch(GeneralStorageConfigDefault $objConfig)
 	{
 		return parent::fetch($objConfig);
 	}
 
-	public function fetchAll(GeneralDataConfigDefault $objConfig)
+	public function fetchAll(GeneralStorageConfigDefault $objConfig)
 	{
 		return parent::fetchAll($objConfig);
 	}
 
-	public function fetchEach(GeneralDataConfigDefault $objConfig)
+	public function fetchEach(GeneralStorageConfigDefault $objConfig)
 	{
 		return parent::fetchEach($objConfig);
 	}
 
-	public function save(InterfaceGeneralModel $objItem, $recursive = false)
+	public function save(GeneralRecord $objItem, $recursive = false)
 	{
 		return parent::save($objItem, $recursive);
 	}

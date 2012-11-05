@@ -72,7 +72,7 @@ class DC_General extends DataContainer implements editable, listable
 
 	/**
 	 * The provider that shall be used for data retrival.
-	 * @var InterfaceGeneralData
+	 * @var GeneralStorage
 	 */
 	protected $objDataProvider = null;
 
@@ -144,7 +144,7 @@ class DC_General extends DataContainer implements editable, listable
 
 	/**
 	 * Current model
-	 * @var InterfaceGeneralModel
+	 * @var GeneralRecord
 	 */
 	protected $objCurrentModel = null;
 
@@ -477,7 +477,7 @@ class DC_General extends DataContainer implements editable, listable
 		else
 		{
 			$arrConfig = array(
-			    'class' => 'GeneralDataDefault',
+			    'class' => 'GeneralStorageDefault',
 			    'source' => $this->strTable
 			);
 			$this->arrDataProvider[$this->strTable] = $arrConfig;
@@ -485,7 +485,7 @@ class DC_General extends DataContainer implements editable, listable
 			if ($this->arrDCA['config']['ptable'])
 			{
 				$arrSourceConfigs['parent'] = array(
-				    'class' => 'GeneralDataDefault',
+				    'class' => 'GeneralStorageDefault',
 				    'source' => $this->arrDCA['config']['ptable']
 				);
 			}
@@ -702,7 +702,7 @@ class DC_General extends DataContainer implements editable, listable
 	 * for given param or return default data provider for given source.
 	 *
 	 * @param string $strSource
-	 * @return InterfaceGeneralData
+	 * @return GeneralStorage
 	 */
 	public function getDataProvider($strSource = null)
 	{
@@ -736,7 +736,7 @@ class DC_General extends DataContainer implements editable, listable
 				}
 				else
 				{
-					$this->arrDataProvider[$strSource] = new GeneralDataDefault();
+					$this->arrDataProvider[$strSource] = new GeneralStorageDefault();
 				}
 			}
 		}
@@ -808,7 +808,7 @@ class DC_General extends DataContainer implements editable, listable
 			if (is_object($mixParent))
 			{
 				// must be model!
-				if (! $mixParent instanceof InterfaceGeneralModel)
+				if (! $mixParent instanceof GeneralRecord)
 				{
 					throw new Exception('incompatible object passed');
 				}
@@ -867,13 +867,13 @@ class DC_General extends DataContainer implements editable, listable
 	 * Return a array with the join conditions for a special table.
 	 * If no value is found in the dca, the default id=pid conditions will be used.
 	 *
-	 * @param InterfaceGeneralModel $objParentModel the model that holds data from the src (aka parent).
+	 * @param GeneralRecord $objParentModel the model that holds data from the src (aka parent).
 	 *
 	 * @param string                $strDstTable    Name of table for "child"
 	 *
 	 * @return array
 	 */
-	public function getChildCondition(InterfaceGeneralModel $objParentModel, $strDstTable)
+	public function getChildCondition(GeneralRecord $objParentModel, $strDstTable)
 	{
 		$arrReturn = array();
 
@@ -988,7 +988,7 @@ class DC_General extends DataContainer implements editable, listable
 		return $arrReturn;
 	}
 
-	protected function checkCondition(InterfaceGeneralModel $objParentModel, $arrFilter)
+	protected function checkCondition(GeneralRecord $objParentModel, $arrFilter)
 	{
 		switch ($arrFilter['operation'])
 		{
@@ -1039,7 +1039,7 @@ class DC_General extends DataContainer implements editable, listable
 		}
 	}
 
-	public function isRootItem(InterfaceGeneralModel $objParentModel, $strTable)
+	public function isRootItem(GeneralRecord $objParentModel, $strTable)
 	{
 		$arrRootConditions = $this->getRootConditions($strTable);
 		return $this->checkCondition($objParentModel, array('operation' => 'AND', 'childs' => $arrRootConditions));
@@ -1049,11 +1049,11 @@ class DC_General extends DataContainer implements editable, listable
 	 * Sets all parent condition fields in the destination to the values from the source model.
 	 * Useful when moving an element after another in a different parent.
 	 *
-	 * @param InterfaceGeneralModel $objDestination the model that shall get updated.
-	 * @param InterfaceGeneralModel $objCopyFrom    the model that the values shall get retrieved from.
+	 * @param GeneralRecord $objDestination the model that shall get updated.
+	 * @param GeneralRecord $objCopyFrom    the model that the values shall get retrieved from.
 	 * @param string                $strParentTable the parent table for the objects.
 	 */
-	public function setSameParent(InterfaceGeneralModel $objDestination, InterfaceGeneralModel $objCopyFrom, $strParentTable)
+	public function setSameParent(GeneralRecord $objDestination, GeneralRecord $objCopyFrom, $strParentTable)
 	{
 		if ($this->isRootItem($objCopyFrom, $strParentTable))
 		{
@@ -1262,7 +1262,7 @@ class DC_General extends DataContainer implements editable, listable
 
 	/**
 	 *
-	 * @return InterfaceGeneralModel
+	 * @return GeneralRecord
 	 */
 	public function getCurrentModel()
 	{
@@ -1289,9 +1289,9 @@ class DC_General extends DataContainer implements editable, listable
 
 	/**
 	 *
-	 * @param InterfaceGeneralModel $objCurrentModel
+	 * @param GeneralRecord $objCurrentModel
 	 */
-	public function setCurrentModel(InterfaceGeneralModel $objCurrentModel)
+	public function setCurrentModel(GeneralRecord $objCurrentModel)
 	{
 		$this->objCurrentModel = $objCurrentModel;
 	}
@@ -1875,10 +1875,10 @@ class DC_General extends DataContainer implements editable, listable
 	 * @param string
 	 * @param mixed
 	 * @param integer
-	 * @param InterfaceGeneralModel
+	 * @param GeneralRecord
 	 * @return string
 	 */
-	public function formatGroupHeader($field, $value, $mode, InterfaceGeneralModel $objModelRow)
+	public function formatGroupHeader($field, $value, $mode, GeneralRecord $objModelRow)
 	{
 		$group = '';
 		static $lookup = array();

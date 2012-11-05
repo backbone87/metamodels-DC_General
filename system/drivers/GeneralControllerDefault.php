@@ -442,7 +442,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 		$objDataProvider = $this->getDC()->getDataProvider();
 
 		// Check if current dataprovider supports multilanguage
-		if (in_array('InterfaceGeneralDataMultiLanguage', class_implements($objDataProvider)))
+		if (in_array('GeneralStorageMultiLanguage', class_implements($objDataProvider)))
 		{
 			$objLanguagesSupported = $this->getDC()->getDataProvider()->getLanguages($intID);
 		}
@@ -1398,7 +1398,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 	 * Therefore the current submitted data will be stored within the model but only on
 	 * success also be saved into the DB.
 	 *
-	 * @return bool|InterfaceGeneralModel Model if the save operation was successful or unnecessary, false otherwise.
+	 * @return bool|GeneralRecord Model if the save operation was successful or unnecessary, false otherwise.
 	 */
 	protected function doSave()
 	{
@@ -1473,9 +1473,9 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 	 *
 	 * Warning nekos could live here.
 	 *
-	 * @param InterfaceGeneralData $objCDP - Current data provider
-	 * @param InterfaceGeneralData $objPDP - Parent data provider
-	 * @param InterfaceGeneralModel $objDBModel - Model of element which should moved
+	 * @param GeneralStorage $objCDP - Current data provider
+	 * @param GeneralStorage $objPDP - Parent data provider
+	 * @param GeneralRecord $objDBModel - Model of element which should moved
 	 * @param mixed $mixAfter - Target element
 	 * @param string $strMode - Mode like cut | create and so on
 	 * @param integer $intInsertMode - Insert Mode => 1 After | 2 Into
@@ -2008,7 +2008,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 		}
 	}
 
-	protected function calcNeededFields(InterfaceGeneralModel $objModel, $strDstTable)
+	protected function calcNeededFields(GeneralRecord $objModel, $strDstTable)
 	{
 		$arrFields = $this->calcLabelFields($strDstTable);
 		$arrChildCond = $this->getDC()->getChildCondition($objModel, $strDstTable);
@@ -2022,7 +2022,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 		return $arrFields;
 	}
 
-	protected function buildLabel(InterfaceGeneralModel $objModel)
+	protected function buildLabel(GeneralRecord $objModel)
 	{
 		// Build full lable
 		$arrFields = array();
@@ -2043,7 +2043,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 	/**
 	 * This "renders" a model for tree view.
 	 *
-	 * @param InterfaceGeneralModel $objModel     the model to render.
+	 * @param GeneralRecord $objModel     the model to render.
 	 *
 	 * @param int                   $intLevel     the current level in the tree hierarchy.
 	 *
@@ -2052,7 +2052,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 	 * @param array                 $arrSubTables the tables that shall be rendered "below" this item.
 	 *
 	 */
-	protected function treeWalkModel(InterfaceGeneralModel $objModel, $intLevel, $arrToggle, $arrSubTables = array())
+	protected function treeWalkModel(GeneralRecord $objModel, $intLevel, $arrToggle, $arrSubTables = array())
 	{
 		$objModel->setMeta(DCGE::TREE_VIEW_LEVEL, $intLevel);
 
@@ -3076,7 +3076,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 	 * Check if a entry has some childs
 	 *
 	 * @param array $arrFilterPattern
-	 * @param InterfaceGeneralModel $objParentModel
+	 * @param GeneralRecord $objParentModel
 	 *
 	 * @return boolean True => has children | False => no children
 	 */
@@ -3112,7 +3112,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 		}
 	}
 
-	protected function setParent(InterfaceGeneralModel $objChildEntry, InterfaceGeneralModel $objParentEntry, $strTable)
+	protected function setParent(GeneralRecord $objChildEntry, GeneralRecord $objParentEntry, $strTable)
 	{
 		$arrChildCondition = $this->getDC()->getParentChildCondition($objParentEntry, $objChildEntry->getProviderName());
 		if (!($arrChildCondition && $arrChildCondition['setOn']))
@@ -3187,7 +3187,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 		return false;
 	}
 
-	protected function setRoot(InterfaceGeneralModel $objCurrentEntry, $strTable)
+	protected function setRoot(GeneralRecord $objCurrentEntry, $strTable)
 	{
 		$arrRootSetter = $this->getDC()->getRootSetter($strTable);
 		if (!($arrRootSetter && $arrRootSetter))
@@ -3214,7 +3214,7 @@ class GeneralControllerDefault extends Controller implements InterfaceGeneralCon
 	 * ---------------------------------------------------------------------
 	 * ////////////////////////////////////////////////////////////////// */
 
-	public function sortCollection(InterfaceGeneralModel $a, InterfaceGeneralModel $b)
+	public function sortCollection(GeneralRecord $a, GeneralRecord $b)
 	{
 		if ($a->getProperty($this->arrColSort['field']) == $b->getProperty($this->arrColSort['field']))
 		{
